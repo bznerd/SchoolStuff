@@ -1,3 +1,9 @@
+'''
+Ben Cambell
+3rd period
+Average grades
+User inputs grade and program returns their average
+'''
 #List of grades from user
 grades = []
 
