@@ -14,17 +14,24 @@ def addPost(user, archive):
 #Take passed user and archive and allow the user to select a post to delete
 def removePost(user, archive):
     print("Posts are: ")
-    #Loop and print all posts with their indexs
-    for x, post in enumerate(archive):
-        print(f"Index: {x}, Post: {post}")
-    #Get the index from the user
-    index = int(input("\nEnter index of post you would like to delete: (-1 to cancel)\n"))
-    #Catch index bounds
-    if index > len(archive)-1 or index < -1:
-        print("Invalid index try again\n")
-        removePost(user, archive)
+    #Loop and print all posts with their ids
+    for post in archive:
+        print(f"ID: {post.get_post_id()}, Post: {post}")
+    #Get the id from the user
+    postID = input("\nEnter ID of post you would like to delete: (-1 to cancel)\n")
+    #Catch not a number
+    if not postID.isnumeric():
+        print("Enter a number please")
+        return removePost(user, archive)
+    postID = int(postID)
+    #Catch id bounds
+    if postID not in [post.get_post_id() for post in archive]:
+        print("Invalid ID try again\n")
+        return removePost(user, archive)
+    #Convert ID to an index:
+    index = [post.get_post_id() for post in archive].index(postID)
     #Cancel case
-    elif index == -1: return
+    if index == -1: return
     #Catch if user is removing another user's post
     elif user != archive[index].get_user_name():
         print("You cannot edit other users' posts\n")
@@ -35,17 +42,24 @@ def removePost(user, archive):
 #Take passed user and post archive and edit a post
 def editPost(user, archive):
     print("Posts are: ")
-    #Loop and print all posts with their indexs
-    for x, post in enumerate(archive):
-        print(f"Index: {x}, Post: {post}")
-    #Get the index from the user
-    index = int(input("\nEnter index of post you would like to edit: (-1 to cancel)\n"))
-    #Catch index bounds
-    if index > len(archive)-1 or index < -1:
-        print("Invalid index try again\n")
-        editPost(user, archive)
+    #Loop and print all posts with their ids
+    for post in archive:
+        print(f"ID: {post.get_post_id()}, Post: {post}")
+    #Get the od from the user
+    postID = input("\nEnter ID of post you would like to edit: (-1 to cancel)\n")
+    #Catch not a number
+    if not postID.isnumeric():
+        print("Enter a number please")
+        return editPost(user, archive)
+    postID = int(postID)
+    #Catch id bounds
+    if postID not in [post.get_post_id() for post in archive]:
+        print("Invalid ID try again\n")
+        return editPost(user, archive)
+    #Convert ID to an index:
+    index = [post.get_post_id() for post in archive].index(postID)
     #Cancel case
-    elif index == -1: return
+    if index == -1: return
     #Catch if user is removing another user's post
     elif user != archive[index].get_user_name():
         print("You cannot edit other users' posts\n")
