@@ -3,7 +3,7 @@ from math import floor
 
 #GUI class inherits tkinter root window
 class GameOfLifeGUI(tk.Tk):
-    #Initialize the main window in the center of the screen with min size
+    #Initialize the main window in the center of the screen with min size and create various variables
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("Conways Game of Life... but jank")
@@ -51,7 +51,7 @@ class GameOfLifeGUI(tk.Tk):
         self.controlsFrame.columnconfigure(0, weight=1)
         self.controlsFrame.columnconfigure(1, weight=7)
         self.controlsFrame.rowconfigure(0, weight=1)
-        #Play pause button
+        #All control widgets
         self.playPause = tk.Button(self.controlsFrame, text='Play pause')
         self.playPause.grid(row=0, column=1)
         self.fpsLabel = tk.Label(self.controlsFrame, text='FPS:')
@@ -116,11 +116,14 @@ class GameOfLifeGUI(tk.Tk):
         self.drawLines()
         self.drawSquares(squareCoords)
 
+    #Bind a new eventhandler function to the click event
     def bindClickEvent(self, eventHandler):
         self.boundClickEvent = eventHandler
 
+    #On click call click event handler and pass grid coordinates
     def clickEvent(self, event):
         x, y = event.x, event.y
+        #modify coords to grid coords
         width = self.gameSpace.winfo_width()/2
         height = self.gameSpace.winfo_height()/2
         x -= width

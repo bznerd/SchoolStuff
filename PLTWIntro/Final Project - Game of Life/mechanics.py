@@ -31,6 +31,7 @@ class GameOfLifeParent:
     def toggleEnabled(self):
         self.enabled = not self.enabled
 
+    #Toggle a selection of cells
     def toggleCells(self,cells):
         for cell in cells:
             if cell not in self.liveCells: self.liveCells.append(cell)
@@ -92,6 +93,7 @@ class GameOfLifeGridScan(GameOfLifeParent):
         if iterations != 1:
             self.iterate(iterations=iterations-1)
 
+    #Togle a selection of cells
     def toggleCells(self, cells):
         for cell in cells:
             if cell not in self.liveCells: self.liveCells.append(cell)
