@@ -34,7 +34,7 @@ def removePost(user, archive):
     if index == -1: return
     #Catch if user is removing another user's post
     elif user != archive[index].get_user_name():
-        print("You cannot edit other users' posts\n")
+        print("You cannot remove other users' posts\n")
         return
     #Remove post
     else: del archive[index]
