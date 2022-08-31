@@ -1,3 +1,7 @@
+"""
+Found on github at https://github.com/bznerd/SchoolStuff/blob/master/Cryptography/crypt_utils.py
+Written by Ben Campbell
+"""
 import math
 
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -88,16 +92,16 @@ def railfence_decipher(ciphertext, num_rows):
 
 
 def multiplicative_cipher(text, key):
-    return ''.join([LETTERS[int((LETTERS.find(char)*key)%26)] for char in text]).lower()
+    return ''.join([LETTERS[int((LETTERS.find(char)*key)%CHAR_SET)] for char in text]).lower()
 
 
 def caesar(message, key, encipher=True):
     if not encipher:
-        key = 26-key % 26
+        key = CHAR_SET-key % CHAR_SET
     
     message = strip(message)
-    if encipher: return ''.join([LETTERS[(LETTERS.find(char) + key) % 26] for char in message])
-    return ''.join([LETTERS[(LETTERS.find(char) + key) % 26] for char in message]).lower()
+    if encipher: return ''.join([LETTERS[(LETTERS.find(char) + key) % CHAR_SET] for char in message])
+    return ''.join([LETTERS[(LETTERS.find(char) + key) % CHAR_SET] for char in message]).lower()
 
 
 def text_block(message, size=5):
