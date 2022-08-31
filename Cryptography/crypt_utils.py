@@ -14,6 +14,15 @@ def strip(text):
     return ''.join([char for char in text if char.upper() in LETTERS])
 
 
+def gcd(a, b):
+    if b > a:
+        a += b
+        b = a-b
+        a -=b
+    if a % b == 0: return b
+    return gcd(b,a%b)
+
+
 def find_primes_less_than(max):
     if max < 2: return []
     primes = [2]
