@@ -61,7 +61,7 @@ def modular_multi_inverse(m, a, r=1):
 
 def railfence_encipher(plaintext, num_rows):
     if num_rows not in [2,3]: raise ValueError("num_rows parameter to railfence_encipher must be 2 or 3")
-    plaintext = strip(plaintext)
+    plaintext = strip(plaintext.upper())
     cipher_grid = [[],[]]
     if num_rows == 3: cipher_grid.append([])
     for x, char in enumerate(plaintext):
@@ -74,7 +74,7 @@ def railfence_encipher(plaintext, num_rows):
 
 def railfence_decipher(ciphertext, num_rows):
     if num_rows not in [2,3]: raise ValueError("num_rows parameter to railfence_encipher must be 2 or 3")
-    ciphertext = strip(ciphertext)
+    ciphertext = strip(ciphertext.upper())
     matrix = [['' for x in range(len(ciphertext))] for y in range(num_rows)]
     filled_matrix = matrix
 
@@ -88,11 +88,11 @@ def railfence_decipher(ciphertext, num_rows):
                 filled_matrix[row][column] = ciphertext[index]
                 index += 1
 
-    return ''.join([filled_matrix[rail(x, num_rows)][x].lower() for x in range(len(ciphertext))])
+    return ''.join([filled_matrix[rail(x, num_rows)][x].lower() for x in range(len(ciphertext))]).lower()
 
 
 def multiplicative_cipher(text, key):
-    return ''.join([LETTERS[int((LETTERS.find(char)*key)%CHAR_SET)] for char in text]).lower()
+    return ''.join([LETTERS[int((LETTERS.find(char.upper())*key)%CHAR_SET)] for char in text]).lower()
 
 
 def caesar(message, key, encipher=True):
@@ -100,8 +100,8 @@ def caesar(message, key, encipher=True):
         key = CHAR_SET-key % CHAR_SET
     
     message = strip(message)
-    if encipher: return ''.join([LETTERS[(LETTERS.find(char) + key) % CHAR_SET] for char in message])
-    return ''.join([LETTERS[(LETTERS.find(char) + key) % CHAR_SET] for char in message]).lower()
+    if encipher: return ''.join([LETTERS[(LETTERS.find(char.upper()) + key) % CHAR_SET] for char in message])
+    return ''.join([LETTERS[(LETTERS.find(char.upper()) + key) % CHAR_SET] for char in message]).lower()
 
 
 def text_block(message, size=5):
