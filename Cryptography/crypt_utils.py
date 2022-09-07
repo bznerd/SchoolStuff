@@ -91,7 +91,7 @@ def railfence_decipher(ciphertext, num_rows):
 
 
 def multiplicative_cipher(text, key):
-    return ''.join([LETTERS[int((LETTERS.find(char)*key)%len(LETTERS))] for char in text]).lower()
+    return ''.join([LETTERS[int((LETTERS.find(char)*key)%len(LETTERS))] for char in text])
 
 
 def caesar(message, key, encipher=True):
@@ -100,7 +100,7 @@ def caesar(message, key, encipher=True):
     
     message = strip(message)
     if encipher: return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message])
-    return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message]).lower()
+    return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message])
 
 
 def text_block(message, size=5):
