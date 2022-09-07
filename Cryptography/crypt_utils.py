@@ -5,7 +5,6 @@ Written by Ben Campbell
 import math
 
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-CHAR_SET = 26
 
 def rail(index, rails):
    pos =  index % ((rails-1) * 2)
@@ -15,7 +14,7 @@ def rail(index, rails):
 
 
 def strip(text):
-    return ''.join([char for char in text if char.upper() in LETTERS])
+    return ''.join([char for char in text if char in LETTERS])
 
 
 def gcd(a, b):
@@ -92,19 +91,19 @@ def railfence_decipher(ciphertext, num_rows):
 
 
 def multiplicative_cipher(text, key):
-    return ''.join([LETTERS[int((LETTERS.find(char.upper())*key)%CHAR_SET)] for char in text]).lower()
+    return ''.join([LETTERS[int((LETTERS.find(char)*key)%len(LETTERS))] for char in text]).lower()
 
 
 def caesar(message, key, encipher=True):
     if not encipher:
-        key = CHAR_SET-key % CHAR_SET
+        key = len(LETTERS)-key % len(LETTERS)
     
     message = strip(message)
-    if encipher: return ''.join([LETTERS[(LETTERS.find(char.upper()) + key) % CHAR_SET] for char in message])
-    return ''.join([LETTERS[(LETTERS.find(char.upper()) + key) % CHAR_SET] for char in message]).lower()
+    if encipher: return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message])
+    return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message]).lower()
 
 
 def text_block(message, size=5):
     for block in range(0, int(len(message)/size)+1):
         message = message[:block*(size+1)]+ ' ' + message[block*(size+1):]
-    return message[1:]
+    return message[1:].upper()
