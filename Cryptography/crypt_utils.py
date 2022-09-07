@@ -4,7 +4,7 @@ Written by Ben Campbell
 """
 import math
 
-LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+GLOBAL_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def rail(index, rails):
    pos =  index % ((rails-1) * 2)
@@ -13,7 +13,7 @@ def rail(index, rails):
    else: return pos
 
 
-def strip(text):
+def strip(text, LETTERS=GLOBAL_LETTERS):
     return ''.join([char for char in text if char in LETTERS])
 
 
@@ -90,11 +90,11 @@ def railfence_decipher(ciphertext, num_rows):
     return ''.join([filled_matrix[rail(x, num_rows)][x].lower() for x in range(len(ciphertext))]).lower()
 
 
-def multiplicative_cipher(text, key):
+def multiplicative_cipher(text, key, LETTERS=GLOBAL_LETTERS):
     return ''.join([LETTERS[int((LETTERS.find(char)*key)%len(LETTERS))] for char in text])
 
 
-def caesar(message, key, encipher=True):
+def caesar(message, key, encipher=True, LETTERS=GLOBAL_LETTERS):
     if not encipher:
         key = len(LETTERS)-key % len(LETTERS)
     
