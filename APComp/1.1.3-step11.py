@@ -1,7 +1,7 @@
 """
 Ben Campbell 9/8/22
-1.1.3 Step 17
-Draw a flower with three rings of pedals each different colors
+1.1.3 Step 11
+Draw a flower with three rings of petals each different colors
 """
 
 import turtle as trtl
@@ -40,14 +40,12 @@ painter.shape("circle")
 painter.turtlesize(2)
 
 
-#Iterate through three rings every four pedals in a ring the color changes
-#For each ring iterate 18 pedals stamped by the turtle
-colors = ['blue', 'red', 'purple','yellow']
+#Iterate through three rings each with a different color
+#For each ring iterate 18 petals stamped by the turtle
+colors = ['blue', 'red', 'purple']
 for ring in range(3):
-  painter.goto(0-(5*(ring+1)),130+(13*ring**2))
   for petal in range(18):
-    flower_index = 22*ring + petal
-    painter.color(colors[(flower_index//4)%4])
+    painter.color(colors[ring])
     drawPedal(ring, petal, (0,110))
 
 #Wait for keyboard input to close program
