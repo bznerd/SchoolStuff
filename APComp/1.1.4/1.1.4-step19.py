@@ -1,7 +1,7 @@
 """
 Ben Campbell 9/13/22
-1.1.4 Step 18
-Modify their code to make two peaks and a vertical reflection
+1.1.4 Step 19
+Modify their code to make two peaks and a vertical reflection and infinite loop
 """
 import turtle as trtl
 
