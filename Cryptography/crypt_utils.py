@@ -107,3 +107,30 @@ def text_block(message, size=5):
     for block in range(0, int(len(message)/size)+1):
         message = message[:block*(size+1)]+ ' ' + message[block*(size+1):]
     return message[1:].upper()
+
+
+def encipher_tabula_recta(plaintext, key, LETTERS=GLOBAL_LETTERS):
+    ciphertext = ''
+    for x, char in enumerate(plaintext):
+        char_index = LETTERS.find(char.upper())
+        ciphertext += LETTERS[(char_index + LETTERS.find(key[x])) % len(LETTERS)]
+
+    return ciphertext
+
+
+def decipher_tabula_recta(ciphertext, key, LETTERS=GLOBAL_LETTERS):
+    plaintext = ''
+    for x, char in enumerate(ciphertext):
+        char_index = LETTERS.find(char.upper())
+        plaintext += LETTERS[(char_index - LETTERS.find(key[x])) % len(LETTERS)]
+
+    return plaintext
+
+def encipher_vigenere(plaintext, key, LETTERS=GLOBAL_LETTERS):
+    full_key =  key * (len(plaintext)//len(key)) + key[:len(plaintext)%len(key)]
+    return encipher_tabula_recta(plaintext, full_key, LETTERS)
+
+
+def decipher_vigenere(ciphertext, key, LETTERS=GLOBAL_LETTERS):
+    full_key =  key * (len(ciphertext)//len(key)) + key[:len(ciphertext)%len(key)]
+    return decipher_tabula_recta(ciphertext, full_key, LETTERS)
