@@ -98,7 +98,6 @@ def caesar(message, key, encipher=True, LETTERS=GLOBAL_LETTERS):
     if not encipher:
         key = len(LETTERS)-key % len(LETTERS)
     
-    message = strip(message)
     if encipher: return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message])
     return ''.join([LETTERS[(LETTERS.find(char) + key) % len(LETTERS)] for char in message])
 
@@ -126,6 +125,7 @@ def decipher_tabula_recta(ciphertext, key, LETTERS=GLOBAL_LETTERS):
 
     return plaintext
 
+
 def encipher_vigenere(plaintext, key, LETTERS=GLOBAL_LETTERS):
     full_key =  key * (len(plaintext)//len(key)) + key[:len(plaintext)%len(key)]
     return encipher_tabula_recta(plaintext, full_key, LETTERS)
@@ -134,3 +134,27 @@ def encipher_vigenere(plaintext, key, LETTERS=GLOBAL_LETTERS):
 def decipher_vigenere(ciphertext, key, LETTERS=GLOBAL_LETTERS):
     full_key =  key * (len(ciphertext)//len(key)) + key[:len(ciphertext)%len(key)]
     return decipher_tabula_recta(ciphertext, full_key, LETTERS)
+
+
+def vigenere(key, message, encipher=True, LETTERS=GLOBAL_LETTERS, autokey=False):
+    if not autokey: full_key =  key * (len(message)//len(key)) + key[:len(message)%len(key)]
+    
+    if encipher:
+        message = strip(message, LETTERS)
+        if autokey: full_key = key + message[:len(message)-len(key)]
+        return encipher_tabula_recta(message, full_key, LETTERS).upper()
+
+    else:
+        if autokey:
+            full_key = key
+            plaintext = ''
+            for x, char in enumerate(message):
+                char_index = LETTERS.find(char.upper())
+                plaintext += LETTERS[(char_index - LETTERS.find(full_key[x])) % len(LETTERS)]
+                if len(full_key) < len(message):
+                    full_key += plaintext[-1]
+
+            return plaintext.lower()
+
+        else:
+            return decipher_tabula_recta(message, full_key, LETTERS)
