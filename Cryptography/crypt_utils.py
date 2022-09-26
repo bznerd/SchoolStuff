@@ -158,3 +158,18 @@ def vigenere(key, message, encipher=True, LETTERS=GLOBAL_LETTERS, autokey=False)
 
         else:
             return decipher_tabula_recta(message, full_key, LETTERS)
+
+
+def gen_letter_combos(length, combos=[''], LETTERS=GLOBAL_LETTERS):
+    if length == 1: return [string + char for string in combos for char in LETTERS]
+    return gen_letter_combos(length-1, [string + char for string in combos for char in LETTERS], LETTERS)
+
+
+def find_repeats(message, size=5, LETTERS=GLOBAL_LETTERS):
+    repeats = []
+    for string in gen_letter_combos(3, LETTERS=LETTERS):
+        if message.count(string) > 1:
+            for full_string in [string + two_len_string for two_len_string in gen_letter_combos(2, LETTERS=LETTERS)]:
+                    if message.count(full_string) > 1: repeats.append(full_string)
+
+    return repeats
