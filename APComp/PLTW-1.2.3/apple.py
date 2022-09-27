@@ -18,8 +18,6 @@ tree_center = (0,100)
 rowsize = 9
 ground_y = -180
 
-#Game over bool
-game_running = True
 
 #Make and randomize letters and apple positions lists
 letters = list("abcdefghijklmnopqrstuvwxyz")
@@ -86,6 +84,7 @@ def drop_apple_logic(letter, turtle_queue, letters):
     if letter not in letters: return
     index = letters.index(letter)
     letters.pop(index)
+    wn.onkeypress(None, letter)
     return turtle_queue.pop(index)
 
 
@@ -108,13 +107,13 @@ def draw_apples(turtle_queue, letters):
 
 #Update queue when a key is pressed
 def update_queue(letter, turtle_queue, letters):
-    if not game_running: return None
     #Drop apple
     temp = drop_apple_logic(letter, turtle_queue, letters)
     draw_apples(turtle_queue, letters)
     #Draw apple drop
     wn.update()
     wn.tracer(True)
+    pause_listners(letters)
     drop_apple_move(temp)
     wn.tracer(False)
     #Update game status and event listners
@@ -126,12 +125,16 @@ def update_queue(letter, turtle_queue, letters):
 def event_listeners(turtle_queue, letters):
     for key in letters[:5]:
         wn.onkeypress(lambda n=key: update_queue(n, turtle_queue, letters), key)
+    
+
+#Unbind all key listners
+def pause_listners(letters):
+    for key in letters:
+        wn.onkeypress(None, key)
 
 
 #Dispaly game over time
 def game_over():
-    global game_running
-    game_running = False
     typer.clear()
     typer.goto(0,0)
     typer.write(f"Game over! Completd in {round(time() - game_time, 1)} seconds", align="center", font=text)
