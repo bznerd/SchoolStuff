@@ -1,0 +1,14 @@
+17b. 7975
+17d. 7976
+18. Driver inattention
+21a. 46
+21c. 120
+21e. 511
+22. The insertion sort is quadratic meaning it gets worse and worse as the data set grows and the merge sort is almost linear meaning it increases mostly proportionally with the dataset.
+23a. 100ms
+23b. 21ms longer or 21% more
+23c. 1000 seconds
+
+Conclusion: 
+1. You cannot draw conclusions without more data or evidence to support the correlation.
+2. Efficiency is not the most important factor when writing all code. Efficiency is only most important when available computing power is limited, or the task is computationally expensive.

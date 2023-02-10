@@ -1,0 +1,7 @@
+4. Makes a list with all the entries that are unique (remove repeats)
+5. Get all the entries in the Access column that match c (the current country) in the Entity column
+7. The marker and linestyle options make the graph more visually appealing, allow more dystinction between different lines (useful later), and can help indicate that the data is discrete not continuous.
+
+Conclusion:
+1. Without widespread access to electricity, countries have very limited potential to innovate in computing. Expanding access to internet and electricity allows citizens to tap into the wealth of online knowledge and begin contributing to computing innovations.
+2. Data analysis can help present important data to persuade important decisions, bring light to neglected problems, and help solve issues to improve society.

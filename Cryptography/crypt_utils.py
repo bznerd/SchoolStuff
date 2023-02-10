@@ -173,3 +173,23 @@ def find_repeats(message, size=5, LETTERS=GLOBAL_LETTERS):
                     if message.count(full_string) > 1: repeats.append(full_string)
 
     return repeats
+
+def egcd(a, b):
+    if a == 0:
+        return b, 0, 1
+
+    gcd, x1, y1 = egcd(b%a, a)
+    x = y1 - (b//a) * x1
+    y = x1
+    
+    return gcd, x, y
+
+def rsa(p, q, e):
+    n = p*q
+    phi = (p-1)*(q-1)
+    gcd, d, y = egcd(e, phi)
+
+    return n, phi, d%phi
+
+def rsa_crypt(message, e, n):
+    return (message**e)%n

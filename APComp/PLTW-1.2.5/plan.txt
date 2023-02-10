@@ -1,0 +1,27 @@
+Game description:
+- Player controls a turtle trying to shoot a ball into a goal
+- Goal generates at a random height after each shot
+- Player has one control, space to shoot
+- Aim indicated by a dashed line sweeps up and down
+- After each goal the speed increases
+- Two modes: Timed, and consecutive
+
+Design:
+- Scene manager
+ - Uses a scene object consisting of multiple turtles
+ - Multiple routines to draw different scenes with differnt text
+- Game object
+ - Manages positions for all "physical" objects, handles movement physics
+ - Targets a set game tick time for physics
+ - Feeds renderer
+- Renderer
+ - Manages moving the turtles
+ - Draws the goal
+ - Draws the aim line
+
+Execution process:
+- All objects are initialized
+ - Bind renderer to game object
+- First draws selection screen with game instructions and mode selection
+- Game is started when a mode is selected
+- 
